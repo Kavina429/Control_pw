@@ -9,3 +9,7 @@ def test_login_valid(page: Page, login_valid):
 @pytest.mark.smoke
 def test_login_not_valid(page: Page, login_not_valid):
     login_not_valid()
+
+@pytest.mark.smoke
+def test_logout(page: Page, logout):
+    logout()

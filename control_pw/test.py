@@ -54,3 +54,19 @@ def login_not_valid(page: Page):
         assert "Your username is invalid!" in text_content
         page.screenshot(path="control_pw/screenshots/login_not_valid.png")
     return login_not_valid_func
+
+@pytest.fixture
+def logout(page: Page):
+    def logout_func():
+        page.goto(data_stend)
+        page.fill(locator_field_username, data_username)
+        page.wait_for_timeout(1000)
+        page.fill(locator_field_password, data_password)
+        page.wait_for_timeout(1000)
+        page.click(locator_button_login)
+        page.wait_for_timeout(1000)
+        page.click(locator_button_logout)
+        text_content = page.inner_text("#flash")
+        assert "You logged out of the secure area!" in text_content
+        page.screenshot(path="control_pw/screenshots/logout.png")
+    return logout_func
